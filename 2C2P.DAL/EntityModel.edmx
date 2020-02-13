@@ -4,38 +4,37 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="C2PModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="C2PModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Transaction">
           <Key>
             <PropertyRef Name="TransactionId" />
           </Key>
-          <Property Name="TransactionId" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="real" Nullable="false" />
+          <Property Name="TransactionId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amount" Type="float" Nullable="false" />
           <Property Name="CurrencyCode" Type="varchar" MaxLength="3" />
           <Property Name="TransactionDate" Type="datetimeoffset" Precision="7" />
-          <Property Name="Status" Type="varchar(max)" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="C2PModelStoreContainer">
           <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="C2PModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Transactions" EntityType="C2PModel.Transaction" />
+        </EntityContainer>
         <EntityType Name="Transaction">
           <Key>
             <PropertyRef Name="TransactionId" />
           </Key>
-          <Property Name="TransactionId" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Single" Nullable="false" />
+          <Property Name="TransactionId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
           <Property Name="CurrencyCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="TransactionDate" Type="DateTimeOffset" Precision="7" />
-          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityContainer Name="DbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -45,11 +44,11 @@
           <EntitySetMapping Name="Transactions">
             <EntityTypeMapping TypeName="C2PModel.Transaction">
               <MappingFragment StoreEntitySet="Transaction">
-                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
-                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

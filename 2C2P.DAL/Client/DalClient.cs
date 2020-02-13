@@ -10,9 +10,15 @@ namespace _2C2P.DAL.Client
     {
         public DalClient()
         {
+            // This is a known issue for EF 6. We need this line to ensure that references are pulled correctly. More information at 
+            // https://stackoverflow.com/questions/18455747/no-entity-framework-provider-found-for-the-ado-net-provider-with-invariant-name
+            var type = typeof(System.Data.Entity.SqlServer.SqlProviderServices); 
+            if (type == null)
+                throw new Exception("Do not remove, ensures static reference to System.Data.Entity.SqlServer");
+
         }
 
-        public Transaction GetTransaction(int transactionId)
+        public Transaction GetTransaction(string transactionId)
         {
             using (DbEntities db = new DbEntities())
             {
@@ -44,7 +50,7 @@ namespace _2C2P.DAL.Client
             }
         }
 
-        public void AddTransaction(Transaction transaction)
+        public void UpdateTransaction(Transaction transaction)
         {
             using (DbEntities db = new DbEntities())
             {
@@ -52,13 +58,18 @@ namespace _2C2P.DAL.Client
                 if (transactionEntity != null)
                 {
                     // TODO decide whether to update existing record or throw exception or do nothin
-                    // for now, do nothing
+                    // for now, replace the old entity
+                    transactionEntity.Amount = transaction.Amount;
+                    transactionEntity.CurrencyCode = transaction.CurrencyCode;
+                    transactionEntity.TransactionDate = transaction.TransactionDate;
+                    transactionEntity.Status = transaction.Status;
                 }
                 else
                 {
                     db.Transactions.Add(transaction);
-                    db.SaveChanges();
                 }
+
+                db.SaveChanges();
             }
         }
     }

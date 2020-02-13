@@ -5,7 +5,7 @@ namespace _2C2P.DAL.Client
 {
     public interface IDalClient
     {
-        Transaction GetTransaction(int transactionId);
+        Transaction GetTransaction(string transactionId);
 
         List<Transaction> GetTransactionByCurrency(string currencyCode);
 
@@ -13,5 +13,6 @@ namespace _2C2P.DAL.Client
 
         List<Transaction> GetTransactionByStatus(string status);
 
-        void AddTransaction(Transaction transaction);
+        void UpdateTransaction(Transaction transaction);
+    }
 }

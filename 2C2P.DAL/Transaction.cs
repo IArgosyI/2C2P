@@ -14,8 +14,8 @@ namespace _2C2P.DAL
     
     public partial class Transaction
     {
-        public int TransactionId { get; set; }
-        public float Amount { get; set; }
+        public string TransactionId { get; set; }
+        public double Amount { get; set; }
         public string CurrencyCode { get; set; }
         public Nullable<System.DateTimeOffset> TransactionDate { get; set; }
         public string Status { get; set; }
