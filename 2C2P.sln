@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2C2P", "2C2P\2C2P.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2C2P.Tests", "2C2P.Tests\2C2P.Tests.csproj", "{B0E7381F-27E7-443A-9C67-4CBA51F57459}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2C2P.DAL", "2C2P.DAL\2C2P.DAL.csproj", "{A4B466BF-6694-471E-9800-8F4F46423769}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B0E7381F-27E7-443A-9C67-4CBA51F57459}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0E7381F-27E7-443A-9C67-4CBA51F57459}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0E7381F-27E7-443A-9C67-4CBA51F57459}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4B466BF-6694-471E-9800-8F4F46423769}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4B466BF-6694-471E-9800-8F4F46423769}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4B466BF-6694-471E-9800-8F4F46423769}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4B466BF-6694-471E-9800-8F4F46423769}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
