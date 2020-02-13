@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _2C2P.DAL.Client
 {
-    public class DalClient
+    public class DalClient : IDalClient
     {
         public DalClient()
         {
