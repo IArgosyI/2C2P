@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using _2C2P.DAL;
 
 namespace _2C2P.Web
 {
@@ -78,6 +79,7 @@ namespace _2C2P.Web
         private void SetupDependencyInjection(IServiceCollection services)
         {
             services.AddSingleton<IDalClient, DalClient>();
+            services.AddSingleton<IParser<Transaction>, CSVParser<Transaction>>();
             services.AddSingleton<ILogger, Logger>();
         }
     }

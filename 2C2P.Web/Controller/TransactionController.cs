@@ -15,14 +15,17 @@ namespace _2C2P.Web.Controller
     public class TransactionController : ControllerBase
     {
         private readonly IDalClient _dalClient;
+        private readonly IParser<Transaction> _parser;
         private readonly ILogger _logger;
 
         public TransactionController(
             IDalClient dalClient,
+            IParser<Transaction> parser,
             ILogger logger
             )
         {
             _dalClient = dalClient;
+            _parser = parser;
             _logger = logger;
         }
 
@@ -36,6 +39,12 @@ namespace _2C2P.Web.Controller
         public void AddTransaction(Transaction transaction)
         {
             _dalClient.UpdateTransaction(transaction);
+        }
+
+        [HttpPost("transaction")]
+        public List<Transaction> UploadTransactionData(string s)
+        {
+            return _parser.Parse(s);
         }
     }
 }
