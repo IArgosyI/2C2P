@@ -43,9 +43,21 @@ namespace _2C2P.Web.Controller
         }
 
         [HttpPost("transaction")]
-        public List<Transaction> UploadTransactionData(string s)
+        public ActionResult<List<Transaction>> UploadTransactions(IFormFile file)
         {
-            return _parser.Parse(new StringReader(s));
+            var filetype = Path.GetExtension(file.FileName).ToLower();
+            if (filetype != ".xml" && filetype != ".csv")
+            {
+                return BadRequest($"File type {filetype} is not supported");
+            }
+
+            List<Transaction> transactions;
+            using (var reader = new StreamReader(file.OpenReadStream()))
+            {
+                transactions = _parser.Parse(reader);
+            }
+
+            return transactions;
         }
     }
 }
