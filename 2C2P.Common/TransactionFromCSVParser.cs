@@ -56,7 +56,7 @@ namespace _2C2P.Common
                     {
                         var transactionId = fields[0];
                         var amount = double.Parse(fields[1]);
-                        var currencyCode = _dataValidator.Validate(DataType.TransactionStatus, fields[4]) ? fields[4] : null;
+                        var currencyCode = _dataValidator.Validate(DataType.CurrencyCode, fields[2]) ? fields[2] : null;
                         var transactionDate = DateTimeOffset.ParseExact(fields[3], "dd/MM/yyyy HH:mm:ss", null);
                         var status = CSV_STATUS_MAP[fields[4]];
 
@@ -74,6 +74,10 @@ namespace _2C2P.Common
                         if (ex is FormatException || ex is KeyNotFoundException)
                         {
                             _logger.LogError($"{string.Join(",", fields)} cannot be parsed to Transaction object. Exception: {ex.Message}");
+                        }
+                        else
+                        {
+                            throw ex;
                         }
                     }
                 }

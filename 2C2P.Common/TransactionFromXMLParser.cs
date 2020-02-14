@@ -61,6 +61,10 @@ namespace _2C2P.Common
                     {
                         _logger.LogError($"{transactionXE.ToString()} cannot be parsed to Transaction object. Exception: {ex.Message}");
                     }
+                    else
+                    {
+                        throw ex;
+                    }
                 }
             }
 
