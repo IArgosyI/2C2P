@@ -44,7 +44,7 @@ namespace _2C2P.Common
 
                     var transactionDate = DateTimeOffset.ParseExact(
                         transactionXE.Element("TransactionDate").Value,
-                        "yyyy-MM-ddThh:mm:ss", 
+                        "yyyy-MM-ddTHH:mm:ss", 
                         null);
 
                     var status = transactionXE.Element("Status").Value;
@@ -61,7 +61,7 @@ namespace _2C2P.Common
                 }
                 catch (Exception ex)
                 {
-                    if (ex is NullReferenceException)
+                    if (ex is FormatException || ex is NullReferenceException)
                     {
                         _logger.LogError($"{transactionXE.ToString()} cannot be parsed to Transaction object. Exception: {ex.Message}");
                         errorCount++;

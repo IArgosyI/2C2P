@@ -49,7 +49,7 @@ namespace _2C2P.Common
                     if (fields.Count() != TRANSACTION_COL_COUNT)
                     {
                         _logger.LogError($"{string.Join(",", fields)} doesn't contain all required columns");
-
+                        errorCount++;
                         continue;
                     }
 
