@@ -79,7 +79,8 @@ namespace _2C2P.Web
         private void SetupDependencyInjection(IServiceCollection services)
         {
             services.AddSingleton<IDalClient, DalClient>();
-            services.AddSingleton<IParser<Transaction>, CSVParser<Transaction>>();
+            services.AddSingleton<IDataValidator, DataValidator>();
+            services.AddSingleton<IParser<Transaction>, TransactionFromCSVParser>();
             services.AddSingleton<ILogger, Logger>();
         }
     }

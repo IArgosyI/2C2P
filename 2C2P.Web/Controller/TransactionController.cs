@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using _2C2P.Common;
@@ -44,7 +45,7 @@ namespace _2C2P.Web.Controller
         [HttpPost("transaction")]
         public List<Transaction> UploadTransactionData(string s)
         {
-            return _parser.Parse(s);
+            return _parser.Parse(new StringReader(s));
         }
     }
 }

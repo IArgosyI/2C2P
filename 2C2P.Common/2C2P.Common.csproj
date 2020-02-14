@@ -60,8 +60,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CSVParser.cs" />
-    <Compile Include="FileParser.cs" />
+    <Compile Include="IDataValidator.cs" />
+    <Compile Include="TransactionFromCSVParser.cs" />
+    <Compile Include="DataValidator.cs" />
     <Compile Include="IParser.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="Logger.cs" />
