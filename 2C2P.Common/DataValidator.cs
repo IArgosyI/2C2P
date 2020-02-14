@@ -20,7 +20,7 @@ namespace _2C2P.Common
         {
             if (type == DataType.CurrencyCode)
             {
-                if (value.Length > 3) throw new FormatException($"Currency code need to be 3 characters long: {value}");
+                if (value.Length != 3) throw new FormatException($"Currency code need to be 3 characters long: {value}");
             }
             else if (type == DataType.TransactionStatus)
             {
