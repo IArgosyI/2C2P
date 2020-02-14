@@ -9,9 +9,9 @@ namespace _2C2P.DAL.Client
 
         List<Transaction> GetTransactionByCurrency(string currencyCode);
 
-        List<Transaction> GetTransactionByDateRange(DateTimeOffset startDate, DateTimeOffset endDate);
+        List<Transaction> GetTransactionsByDateRange(DateTimeOffset startDate, DateTimeOffset endDate);
 
-        List<Transaction> GetTransactionByStatus(string status);
+        List<Transaction> GetTransactionsByStatus(string status);
 
         void UpdateTransaction(Transaction transaction);
 

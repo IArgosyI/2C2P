@@ -34,7 +34,7 @@ namespace _2C2P.DAL.Client
             }
         }
 
-        public List<Transaction> GetTransactionByDateRange(DateTimeOffset startDate, DateTimeOffset endDate)
+        public List<Transaction> GetTransactionsByDateRange(DateTimeOffset startDate, DateTimeOffset endDate)
         {
             using (DbEntities db = new DbEntities())
             {
@@ -42,7 +42,7 @@ namespace _2C2P.DAL.Client
             }
         }
 
-        public List<Transaction> GetTransactionByStatus(string status)
+        public List<Transaction> GetTransactionsByStatus(string status)
         {
             using (DbEntities db = new DbEntities())
             {

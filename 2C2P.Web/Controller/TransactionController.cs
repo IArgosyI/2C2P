@@ -43,14 +43,14 @@ namespace _2C2P.Web.Controller
         [HttpGet("transaction/dateRange")]
         public List<TransactionDisplay> GetTransactionsByDateRange(DateTimeOffset start, DateTimeOffset end)
         {
-            return _dalClient.GetTransactionByDateRange(start, end)
+            return _dalClient.GetTransactionsByDateRange(start, end)
                 .Select(t => TransactionDisplay.ConvertToDisplay(t)).ToList();
         }
 
         [HttpGet("transaction/status")]
         public List<TransactionDisplay> GetTransactionsByStatus(string status)
         {
-            return _dalClient.GetTransactionByStatus(status)
+            return _dalClient.GetTransactionsByStatus(status)
                 .Select(t => TransactionDisplay.ConvertToDisplay(t)).ToList();
         }
 
