@@ -9,20 +9,27 @@ namespace _2C2P.Common
     {
         private readonly IDalClient _dalClient;
         private readonly IFileParser<Transaction> _transactionParser;
+        private readonly ILogger _logger;
 
         public DatabaseUploader(
             IDalClient dalClient, 
-            IFileParser<Transaction> transactionParser)
+            IFileParser<Transaction> transactionParser,
+            ILogger logger)
         {
             _dalClient = dalClient;
             _transactionParser = transactionParser;
+            _logger = logger;
         }
 
         public List<Transaction> UploadTransactionsToDatabase(TextReader reader, string fileType)
         {
             var transactions = _transactionParser.Parse(reader, fileType);
 
-            _dalClient.UpdateTransactions(transactions);
+            if (transactions != null)
+            {
+                _logger.LogInformation($"Uploading {transactions.Count} transactions to Database");
+                _dalClient.UpdateTransactions(transactions);
+            }
 
             return transactions;
         }

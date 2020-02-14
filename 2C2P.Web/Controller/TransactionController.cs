@@ -79,6 +79,11 @@ namespace _2C2P.Web.Controller
                 transactions = _databaseUploader.UploadTransactionsToDatabase(reader, filetype);
             }
 
+            if (transactions == null)
+            {
+                return BadRequest($"File {file.FileName} contains un-parsable items, please check the file/log for more information");
+            }
+
             return transactions;
         }
     }
