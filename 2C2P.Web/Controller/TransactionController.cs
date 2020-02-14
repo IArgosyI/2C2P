@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using _2C2P.Common;
 using _2C2P.DAL;
 using _2C2P.DAL.Client;
+using _2C2P.Web.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,7 +44,7 @@ namespace _2C2P.Web.Controller
         }
 
         [HttpPost("transaction")]
-        public ActionResult<List<Transaction>> UploadTransactions(IFormFile file)
+        public ActionResult<List<TransactionDisplay>> UploadTransactions(IFormFile file)
         {
             var filetype = Path.GetExtension(file.FileName).ToLower();
             if (filetype != ".xml" && filetype != ".csv")
@@ -57,7 +58,7 @@ namespace _2C2P.Web.Controller
                 transactions = _parser.Parse(reader);
             }
 
-            return transactions;
+            return transactions.Select(t => new TransactionDisplay(t)).ToList();
         }
     }
 }
