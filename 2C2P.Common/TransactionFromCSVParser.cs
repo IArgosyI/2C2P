@@ -18,6 +18,13 @@ namespace _2C2P.Common
 
 
         private const int TRANSACTION_COL_COUNT = 5;
+        // This is a mapping between STATUS value in CSV file and STATUS value in Database
+        private readonly Dictionary<string, string> CSV_STATUS_MAP = new Dictionary<string, string>()
+        {
+            { "Approved", "Approved" },
+            { "Failed", "Rejected" },
+            { "Finished", "Done" }
+        };
 
         public TransactionFromCSVParser(
             IDataValidator dataValidator,
@@ -42,28 +49,33 @@ namespace _2C2P.Common
                     {
                         _logger.LogError($"{string.Join(",", fields)} doesn't contain all required columns");
 
-                        // Design : Decide whether to fail everything, or just skip this one
                         continue;
                     }
 
-                    if (!_dataValidator.Validate(DataType.CurrencyCode, fields[2]) ||
-                        !double.TryParse(fields[1], out double amount) ||
-                        // TODO: Confirm the date time format
-                        !DateTimeOffset.TryParseExact(fields[3], "dd/MM/yyyy HH:mm:ss", null, DateTimeStyles.None, out DateTimeOffset transactionDate) ||
-                        !_dataValidator.Validate(DataType.TransactionStatus, fields[4]))
+                    try
                     {
-                        _logger.LogError($"{string.Join(",", fields)} cannot be parsed to Transaction object");
-                        continue;
-                    }
+                        var transactionId = fields[0];
+                        var amount = double.Parse(fields[1]);
+                        var currencyCode = _dataValidator.Validate(DataType.TransactionStatus, fields[4]) ? fields[4] : null;
+                        var transactionDate = DateTimeOffset.ParseExact(fields[3], "dd/MM/yyyy HH:mm:ss", null);
+                        var status = CSV_STATUS_MAP[fields[4]];
 
-                    transactions.Add(new Transaction
+                        transactions.Add(new Transaction
+                        {
+                            TransactionId = transactionId,
+                            Amount = amount,
+                            CurrencyCode = currencyCode,
+                            TransactionDate = transactionDate,
+                            Status = status
+                        });
+                    }
+                    catch(Exception ex)
                     {
-                        TransactionId = fields[0],
-                        Amount = amount,
-                        CurrencyCode = fields[2],
-                        TransactionDate = transactionDate,
-                        Status = fields[4]
-                    });
+                        if (ex is FormatException || ex is KeyNotFoundException)
+                        {
+                            _logger.LogError($"{string.Join(",", fields)} cannot be parsed to Transaction object. Exception: {ex.Message}");
+                        }
+                    }
                 }
             }
             return transactions;

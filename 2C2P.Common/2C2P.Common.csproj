@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IDataValidator.cs" />
+    <Compile Include="TransactionFromXMLParser.cs" />
     <Compile Include="TransactionFromCSVParser.cs" />
     <Compile Include="DataValidator.cs" />
     <Compile Include="IParser.cs" />

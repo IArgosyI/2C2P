@@ -80,7 +80,7 @@ namespace _2C2P.Web
         {
             services.AddSingleton<IDalClient, DalClient>();
             services.AddSingleton<IDataValidator, DataValidator>();
-            services.AddSingleton<IParser<Transaction>, TransactionFromCSVParser>();
+            services.AddSingleton<IParser<Transaction>, TransactionFromXMLParser>();
             services.AddSingleton<ILogger, Logger>();
         }
     }

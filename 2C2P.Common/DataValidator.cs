@@ -9,7 +9,7 @@ namespace _2C2P.Common
 {
     public class DataValidator: IDataValidator
     {
-        private readonly List<string> TRANSACTION_STATUS_ALLOW = new List<string>() { "Approved", "Failed", "Finished" };
+        private readonly List<string> TRANSACTION_STATUS_ALLOW = new List<string>() { "Approved", "Rejected", "Done" };
 
         public DataValidator()
         {
@@ -20,11 +20,11 @@ namespace _2C2P.Common
         {
             if (type == DataType.CurrencyCode)
             {
-                if (value.Length > 3) return false;
+                if (value.Length > 3) throw new FormatException($"Currency code need to be 3 characters long: {value}");
             }
             else if (type == DataType.TransactionStatus)
             {
-                if (!TRANSACTION_STATUS_ALLOW.Contains(value)) return false;
+                if (!TRANSACTION_STATUS_ALLOW.Contains(value)) throw new FormatException($"Status {value} is not allowed");
             }
 
             return true;
