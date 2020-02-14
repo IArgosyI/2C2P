@@ -1,19 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using _2C2P.Common;
 using _2C2P.DAL.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using _2C2P.DAL;
 
 namespace _2C2P.Web
 {
@@ -79,9 +72,8 @@ namespace _2C2P.Web
         private void SetupDependencyInjection(IServiceCollection services)
         {
             services.AddSingleton<IDalClient, DalClient>();
-            services.AddSingleton<IDataValidator, DataValidator>();
-            services.AddSingleton<IParser<Transaction>, TransactionFromXMLParser>();
             services.AddSingleton<ILogger, Logger>();
+            services.RegisterCommon();
         }
     }
 }

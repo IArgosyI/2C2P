@@ -19,6 +19,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
@@ -27,7 +28,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\2C2P.Common\2C2P.Common.csproj" />
-    <ProjectReference Include="..\2C2P.DAL\2C2P.DAL.csproj" />
   </ItemGroup>
 
 </Project>

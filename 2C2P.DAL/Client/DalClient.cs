@@ -72,5 +72,31 @@ namespace _2C2P.DAL.Client
                 db.SaveChanges();
             }
         }
+
+        public void UpdateTransactions(List<Transaction> transactions)
+        {
+            using (DbEntities db = new DbEntities())
+            {
+                foreach (var transaction in transactions)
+                {
+                    var transactionEntity = db.Transactions.SingleOrDefault(t => t.TransactionId == transaction.TransactionId);
+                    if (transactionEntity != null)
+                    {
+                        // TODO decide whether to update existing record or throw exception or do nothin
+                        // for now, replace the old entity
+                        transactionEntity.Amount = transaction.Amount;
+                        transactionEntity.CurrencyCode = transaction.CurrencyCode;
+                        transactionEntity.TransactionDate = transaction.TransactionDate;
+                        transactionEntity.Status = transaction.Status;
+                    }
+                    else
+                    {
+                        db.Transactions.Add(transaction);
+                    }
+
+                }
+                db.SaveChanges();
+            }
+        }
     }
 }

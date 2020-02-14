@@ -11,7 +11,7 @@ using System.Xml.Linq;
 
 namespace _2C2P.Common
 {
-    public class TransactionFromXMLParser : IParser<Transaction>
+    public class TransactionFromXMLParser : IXMLParser<Transaction>
     {
         private readonly IDataValidator _dataValidator;
         private readonly ILogger _logger;

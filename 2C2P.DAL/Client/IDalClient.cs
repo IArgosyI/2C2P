@@ -14,5 +14,7 @@ namespace _2C2P.DAL.Client
         List<Transaction> GetTransactionByStatus(string status);
 
         void UpdateTransaction(Transaction transaction);
+
+        void UpdateTransactions(List<Transaction> transactions);
     }
 }

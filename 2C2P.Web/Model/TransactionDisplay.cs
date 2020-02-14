@@ -35,18 +35,28 @@ namespace _2C2P.Web.Model
         }
 
         // This is a mapping between STATUS value in Database and STATUS value to be displayed
-        private readonly Dictionary<string, StatusForDisplay> DISPLAY_STATUS_MAP = new Dictionary<string, StatusForDisplay>()
+        private static readonly Dictionary<string, StatusForDisplay> DISPLAY_STATUS_MAP = new Dictionary<string, StatusForDisplay>()
         {
             { "Approved", StatusForDisplay.A },
             { "Rejected", StatusForDisplay.R },
             { "Done", StatusForDisplay.D }
         };
 
-        public TransactionDisplay(Transaction transaction)
+        public static TransactionDisplay ConvertToDisplay(Transaction transaction)
         {
-            this.Id = transaction.TransactionId;
-            this.Payment = $"{string.Format("{0:F2}", transaction.Amount)} {transaction.CurrencyCode}";
-            this.Status = DISPLAY_STATUS_MAP[transaction.Status];
+            if (transaction == null)
+            {
+                return null;
+            }
+            else
+            {
+                return new TransactionDisplay()
+                {
+                    Id = transaction.TransactionId,
+                    Payment = $"{string.Format("{0:F2}", transaction.Amount)} {transaction.CurrencyCode}",
+                    Status = DISPLAY_STATUS_MAP[transaction.Status],
+                };
+            }
         }
     }
 }

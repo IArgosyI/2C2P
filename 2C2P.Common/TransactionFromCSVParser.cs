@@ -11,7 +11,7 @@ using System.Xml;
 
 namespace _2C2P.Common
 {
-    public class TransactionFromCSVParser : IParser<Transaction>
+    public class TransactionFromCSVParser : ICSVParser<Transaction>
     {
         private readonly IDataValidator _dataValidator;
         private readonly ILogger _logger;
