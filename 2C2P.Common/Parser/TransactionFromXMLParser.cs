@@ -30,6 +30,7 @@ namespace _2C2P.Common
             var transactions = new List<Transaction>();
 
             XElement transactionsXE = XElement.Load(reader);
+            int errorCount = 0;
             foreach(var transactionXE in transactionsXE.Elements("Transaction"))
             {
                 try
@@ -60,6 +61,7 @@ namespace _2C2P.Common
                     if (ex is NullReferenceException)
                     {
                         _logger.LogError($"{transactionXE.ToString()} cannot be parsed to Transaction object. Exception: {ex.Message}");
+                        errorCount++;
                     }
                     else
                     {
@@ -68,7 +70,8 @@ namespace _2C2P.Common
                 }
             }
 
-            return transactions;
+            _logger.LogInformation($"Parsing xml file has error count : {errorCount}");
+            return errorCount == 0 ? transactions: null;
         }
 
     }

@@ -30,6 +30,7 @@ namespace _2C2P.Web
             });
 
 
+            services.AddApplicationInsightsTelemetry();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSwaggerGen(c =>
             {

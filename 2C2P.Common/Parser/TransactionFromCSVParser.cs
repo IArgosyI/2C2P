@@ -37,6 +37,7 @@ namespace _2C2P.Common
         public List<Transaction> Parse(TextReader reader)
         {
             var transactions = new List<Transaction>();
+            int errorCount = 0;
             using (TextFieldParser parser = new TextFieldParser(reader))
             {
                 parser.SetDelimiters(new string[] { "," });
@@ -74,6 +75,7 @@ namespace _2C2P.Common
                         if (ex is FormatException || ex is KeyNotFoundException)
                         {
                             _logger.LogError($"{string.Join(",", fields)} cannot be parsed to Transaction object. Exception: {ex.Message}");
+                            errorCount++;
                         }
                         else
                         {
@@ -82,7 +84,9 @@ namespace _2C2P.Common
                     }
                 }
             }
-            return transactions;
+
+            _logger.LogInformation($"Parsing csv file has error count : {errorCount}");
+            return errorCount == 0 ? transactions : null;
         }
 
     }
