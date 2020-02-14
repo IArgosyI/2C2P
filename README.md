@@ -9,7 +9,7 @@ https://2c2pweb-app.azurewebsites.net/swagger/index.html
 
 Hosting: Azure App Service
 Server: ASP .NET CORE with .NET Framework
-DB: Microsoft SQL Server
+DB: Azure SQL Server
 Logging: Application Insights
 
 Let me know if you have any questions.
