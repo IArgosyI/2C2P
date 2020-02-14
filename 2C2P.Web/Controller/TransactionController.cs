@@ -84,7 +84,7 @@ namespace _2C2P.Web.Controller
         /// Upload transaction from either CSV or XML file
         /// </summary>
         /// <param name="file"></param>
-        /// <returns></returns>
+        /// <returns> List of Transactions that is uploaded to Database </returns>
         [HttpPost("transaction")]
         public ActionResult<List<Transaction>> UploadTransactions(IFormFile file)
         {

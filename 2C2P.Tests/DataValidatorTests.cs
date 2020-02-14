@@ -27,6 +27,18 @@ namespace _2C2P.Tests
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
+        public void UploadTransactionsToDatabase_Fail_With_51_Letters_Transaction_Id()
+        {
+            // Arrange
+
+            // Act
+            _dataValidator.Validate(DataType.TransactionId, "123456789012345678901234567890123456789012345678901");
+
+            // Verify
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
         public void UploadTransactionsToDatabase_Fail_With_4_Letters_Currency_Code()
         {
             // Arrange
@@ -67,6 +79,8 @@ namespace _2C2P.Tests
             // Arrange
 
             // Act
+            _dataValidator.Validate(DataType.TransactionId, "TRANSACTION ID");
+
             _dataValidator.Validate(DataType.CurrencyCode, "ABC");
 
             _dataValidator.Validate(DataType.TransactionStatus, "Approved");
