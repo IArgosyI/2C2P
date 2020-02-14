@@ -25,9 +25,11 @@ namespace _2C2P.Common
         {
             var transactions = _transactionParser.Parse(reader, fileType);
 
+            // if transaction is null, then something went wrong with the parser, skip uploading
             if (transactions != null)
             {
                 _logger.LogInformation($"Uploading {transactions.Count} transactions to Database");
+                _logger.LogMetric("TransactionUpload", transactions.Count);
                 _dalClient.UpdateTransactions(transactions);
             }
 

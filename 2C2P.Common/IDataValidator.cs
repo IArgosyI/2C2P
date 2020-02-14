@@ -15,6 +15,7 @@
 
     public enum DataType
     {
+        TransactionId,
         CurrencyCode,
         TransactionStatus
     };

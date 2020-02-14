@@ -18,7 +18,11 @@ namespace _2C2P.Common
 
         public bool Validate(DataType type, string value)
         {
-            if (type == DataType.CurrencyCode)
+            if (type == DataType.TransactionId)
+            {
+                if (value.Length > 50) throw new FormatException($"Transaction Id cannot be longer than 50: {value}");
+            }
+            else if (type == DataType.CurrencyCode)
             {
                 if (value.Length != 3) throw new FormatException($"Currency code need to be 3 characters long: {value}");
             }

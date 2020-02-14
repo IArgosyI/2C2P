@@ -55,7 +55,7 @@ namespace _2C2P.Common
 
                     try
                     {
-                        var transactionId = fields[0];
+                        var transactionId = _dataValidator.Validate(DataType.TransactionId, fields[0]) ? fields[0] : null;
                         var amount = double.Parse(fields[1]);
                         var currencyCode = _dataValidator.Validate(DataType.CurrencyCode, fields[2]) ? fields[2] : null;
                         var transactionDate = DateTimeOffset.ParseExact(fields[3], "dd/MM/yyyy HH:mm:ss", null);

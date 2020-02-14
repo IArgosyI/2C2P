@@ -33,6 +33,11 @@ namespace _2C2P.Web.Controller
             _logger = logger;
         }
 
+        /// <summary>
+        /// Get Transaction by transaction Id
+        /// </summary>
+        /// <param name="transactionId"></param>
+        /// <returns></returns>
         [HttpGet("transaction")]
         public TransactionDisplay GetTransaction(string transactionId)
         {
@@ -40,6 +45,12 @@ namespace _2C2P.Web.Controller
             return TransactionDisplay.ConvertToDisplay(_dalClient.GetTransaction(transactionId));
         }
 
+        /// <summary>
+        /// Get Transaction by start and end date
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
         [HttpGet("transaction/dateRange")]
         public List<TransactionDisplay> GetTransactionsByDateRange(DateTimeOffset start, DateTimeOffset end)
         {
@@ -47,6 +58,11 @@ namespace _2C2P.Web.Controller
                 .Select(t => TransactionDisplay.ConvertToDisplay(t)).ToList();
         }
 
+        /// <summary>
+        /// Get transaction by status. Status need to be either "Approved", "Rejected" or "Done"
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
         [HttpGet("transaction/status")]
         public List<TransactionDisplay> GetTransactionsByStatus(string status)
         {
@@ -54,12 +70,21 @@ namespace _2C2P.Web.Controller
                 .Select(t => TransactionDisplay.ConvertToDisplay(t)).ToList();
         }
 
+        /// <summary>
+        /// Update transaction to be as the given input. If no transaction exist, it will create a new one
+        /// </summary>
+        /// <param name="transaction"></param>
         [HttpPut("transaction")]
         public void UpdateTransaction(Transaction transaction)
         {
             _dalClient.UpdateTransaction(transaction);
         }
 
+        /// <summary>
+        /// Upload transaction from either CSV or XML file
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         [HttpPost("transaction")]
         public ActionResult<List<Transaction>> UploadTransactions(IFormFile file)
         {

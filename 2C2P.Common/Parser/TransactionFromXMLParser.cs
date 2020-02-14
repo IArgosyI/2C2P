@@ -42,7 +42,10 @@ namespace _2C2P.Common
                     var currencyCode = paymentDetailsXE.Element("CurrencyCode").Value;
                     _dataValidator.Validate(DataType.CurrencyCode, currencyCode);
 
-                    var transactionDate = DateTimeOffset.Parse(transactionXE.Element("TransactionDate").Value);
+                    var transactionDate = DateTimeOffset.ParseExact(
+                        transactionXE.Element("TransactionDate").Value,
+                        "yyyy-MM-ddThh:mm:ss", 
+                        null);
 
                     var status = transactionXE.Element("Status").Value;
                     _dataValidator.Validate(DataType.TransactionStatus, status);
